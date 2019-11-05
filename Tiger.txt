@@ -1,0 +1,23 @@
+Core funktions:
+    Syn: En kon framför huvudet
+    Passivsyn: Lite bredare än synen och är till för att kunna hitta maten/vatten lättare
+    Hörsel: 360* runt om kring för att analysera ljudet runt omkring
+    Rörelse: Sätte för tigern att ta sig från en platts till en annan och 
+    Matbehov: Hur snabbt den blir hungrig / törstig 
+    Attackera: När den är tillräkligt hungrig så attackerar den
+    Dricka: Försöker hitta vatten och när den har hittat vattnet så går den dit och dricker sig full
+    Paras: Mannen kollar efter en kvinna och sedan väljer kvinnan om den vill para sig eller inte beroende på attraktiviteten av mannen 
+           och kvinnans vilja till att paras
+    Mutera: När ett barn skapas så får den 3 värden för varje egenskap dvs en från pappa en från mamma och en slumpmässig där mutationen kommer 
+    Gömma: Går långsamt efter ett vildsvin om vildsvinet inte har sett tigern för att smyga sig på det
+    Dö: Försvinner liksom 
+    Idle: Letar efter ett djur att stalka osv
+    
+Egenegenskaper:
+    Hastighet/Törst och Hunger: kontrar varandra, desto snabbare desto snabbare blir tigern hungrig/törstig, vise versa
+    Syn/Hörsel: Desto längre syn den har desto sämre hörselförmåga har den, vise versa
+    Attraktivitet/ Vilja till parning: Desto attraktiv djuret är desto mindre kommer djuret ha behov för att paras, vise versa
+    
+    
+    
+    
