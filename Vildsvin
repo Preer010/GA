@@ -1,0 +1,19 @@
+Core functions:
+  Syn: En kon framför huvudet som agerar som synfält.
+  Passiv syn: Ett bredare synfält som används för att hitta mat och vatten.
+  Rörelse: Att röra sig beroende på vilken hastighet som går att uppnå.
+  Hörsel: 360 grader runt djuret som visar hur långt djuret kan höra.
+  Idle: När djuret inte har något behov så kommer den gå runt mållöst, tills den hittar något att göra.
+  Äta: Matliv går upp.
+  Dricka: Törstliv går upp.
+  Dö: Bli mat till tiger.
+  Para: Föröka sig med motsatta kön av samma art med chans till mutation.
+  Mutera: Djuret som föds och muteras kommer ha olika egenskaper i jämförelse med tidigare generation.
+  Gömma: Röra sig försiktigt ifrån hotet.
+  (skada)
+  
+Egenskaper:
+  Hastighet / Törst & Hunger
+  Syn / Hörsel
+  Attraktivitet / Vilja till parning
+  
