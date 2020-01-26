@@ -1,39 +1,53 @@
 from tkinter import *
 import random
+s = 6  # Bestämmer kordinater för var fyrkanterna ska hamna samt z
+z = s  # Hur många fyrkanter rutnäte består av på varje axel
+hagex = 0  # Vilken nivå av hage (inte klar)
+hagey = 0
+fC = 0  # FyrkantsCounter
 
-s = 3 #Bestämmer kordinater för var fyrkanterna ska hamna samt z
-z = s #Hur många fyrkanter rutnäte består av på varje axel
-hage = 0 #Vilken nivå av hage (inte klar)
-fC = 0  #FyrkantsCounter
 
 def nyFyrkant():
-    global fC, hage
-    randomx = random.uniform(10 + (1000/s*hage), 1000/s + (1000/s*hage)) #Bestämmer x-kordinaterna för rektangeln
-    randomy = random.uniform(10 + (1000/s*hage), 1000/s + (1000/s*hage)) #Bestämmer y-kordinaterna för rektangeln
-    
-    maincanvas.create_rectangle(randomx,randomy,randomx+1,randomy+1,fill = "black",width = 10) #Ritar fyrkanterna
-    root.after(10, nyFyrkant) #Hastiheten som nya fyrkanter kommer upp i millisekunder 1/1000s
-    fC += 1 #Vill inte ha fler än 10 i en hage (inte klar)
+    global fC, hagex, hagey, s
+    colors = ["black", "red", "blue", "yellow"]
+    randomx = random.uniform(2 + (w / s * hagex),
+                             1000 / s + (h / s * hagex))  # Bestämmer x-kordinaterna för rektangeln
+    randomy = random.uniform( 2+(1000 / s * hagey),
+                             1000 / s + (1000 / s * hagey))  # Bestämmer y-kordinaterna för rektangeln
+    n = maincanvas.create_rectangle(randomx, randomy, randomx + 1, randomy + 1, outline=colors[random.randint(0, 3)], width=10)  # Ritar fyrkanterna
+    print(n)
+    fC += 1  # Vill inte ha fler än 10 i en hage (inte klar)
     if fC == 10:
-        fC = fC*0
-        hage += 1
-        
-    
+        fC = 0
+        hagex += 1
+        if hagex > s-1:
+            hagex = 0
+            hagey += 1
+            if hagey > s-1:
+                return
+    root.after(100, nyFyrkant)  # Hastiheten som nya fyrkanter kommer upp i millisekunder 1/1000s
 
+def main(z):
+    print("hej")
+    #maincanvas.delete("all")
+    for i in range(z + 1):  # Ritar ett rutnät
+        maincanvas.create_line(i * 1000 / z, 0, i * 1000 / z, 1000, fill="black", width=2.5)
+        maincanvas.create_line(0, i * 1000 / z, 1000, i * 1000 / z, fill="black", width=2.5)
+    nyFyrkant()
 
+def fun():
+    print("fun")
 root = Tk()
 
 root.title("Ga")
-w = 1000 #bredd på canvas
-h = 1000 #höjd på canvas
-maincanvas = Canvas(root, bg = "white", width = w, height = h) #Canvas
-maincanvas.grid(row = 1, column = 1,columnspan = 5, rowspan = 5)
-
-
-for i in range(z+1): #Ritar ett rutnät
-    maincanvas.create_line(i*1000/z, 0, i*1000/z, 1000, fill="black",width = 5)
-    maincanvas.create_line(0, i*1000/z, 1000, i*1000/z, fill="black",width = 5)
-nyFyrkant()
+w = 1000  # bredd på canvas
+h = 1000  # höjd på canvas
+maincanvas = Canvas(root, bg="white", width=w, height=h)  # Canvas
+maincanvas.grid(row=1, column=1, columnspan=5, rowspan=5)
+print(maincanvas.children)
+main(z)
+restartBut = Button(root, text="restart", command = fun(),anchor = NW, width = 10, height =3)
+restartBut.grid(row=1, column = 10)
 
 
 
