@@ -5,48 +5,55 @@ class Application(Frame):
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
-        self.w = 900
-        self.h = 900
-        self.s = 4
-        self.fieldx = 0
-        self.fieldy = 0
-        self.fC = 0
+        self.w = 900 # Width of the Canvas
+        self.h = 900 # Height of the Canvas
+        self.s = 4 # s**2 amount of fields
+        self.fieldx = 0 # Current field in x
+        self.fieldy = 0 # Current field in y
+        self.fC = 0 # Current amount of squares in the current field
+        self.fCMax = 10 # The maximum of squares in a field
         self.createStarterWidgets()
 
     def createStarterWidgets(self):
+        # The Canvas where the fields will be drawn
         self.mainCanvas = Canvas(self.master, width=self.w, height=self.h)
         self.mainCanvas.grid(row=0, column=0)
+        # Start button made to start the simulation
         self.start = Button(self.master, text = "Start", bg="grey", command=lambda : self.createGrid(), width=15, height=4)
         self.start.grid(row=0,column=1,sticky =N)
+        # An entry where you can change self.s so you get a new amount of fields next time you start it
         self.fieldLabel = Label(self.master, text ="How many Fields: ")
         self.fieldLabel.grid(row=0, column=1, sticky=W)
         self.fieldsEntry =Entry(self.master, bg="grey", width=10, font = 1)
         self.fieldsEntry.grid(row=0, column = 2,sticky =W)
 
     def createGrid(self):
-        print("h")
-        self.mainCanvas.delete("all")
-        if self.fieldsEntry.get():
+        self.mainCanvas.delete("all") # Cleans the canvas
+        if self.fieldsEntry.get(): # If there is a number in our entry, self.s will change to that number. otherwise it will be the same as the last time
             self.s = int(self.fieldsEntry.get())
-        for i in range(self.s + 1):  # Ritar ett rutnät
-            self.mainCanvas.create_line(i * self.w / self.s, 0,
-                                        i * self.w / self.s, self.h,
+        for i in range(self.s + 1):  # Draws the fields
+            # Vertical lines
+            self.mainCanvas.create_line(i * self.w / self.s, 0,  #The first cordinate for the line
+                                        i * self.w / self.s, self.h, # The second cordinate for the line
                                         fill="black", width=2.5)
+            # Horizontal lines
             self.mainCanvas.create_line(0, i * self.h / self.s, self.w ,
                                         i * self.h / self.s,
                                         fill="black", width=2.5)
-        self.fieldx, self.fieldy, self.fC = 0, 0, 0
+        self.fieldx, self.fieldy, self.fC = 0, 0, 0 # Resets which field we are in and how many squares that are in it
         self.generateSquares()
+
     def generateSquares(self):
-        colors = ["black", "red", "blue", "yellow"]
+        colors = ["black", "red", "blue", "green"] # All the colors that can be generated
+        color = colors[random.randint(0, 3)]
         self.randomx = random.uniform((self.w / self.s * self.fieldx),
-                                 self.h / self.s + (self.h / self.s * self.fieldx))  # Bestämmer x-kordinaterna för rektangeln
+                                 self.h / self.s + (self.h / self.s * self.fieldx))  # Random x cord for the cube in the field
         self.randomy = random.uniform((self.w / self.s * self.fieldy),
-                                 self.h / self.s + (self.h / self.s * self.fieldy))  # Bestämmer y-kordinaterna för rektangeln
-        self.mainCanvas.create_rectangle(self.randomx, self.randomy, self.randomx + 1, self.randomy + 1,
-                                        outline=colors[random.randint(0, 3)], width=10)  # Ritar fyrkanterna
-        self.fC += 1  # Vill inte ha fler än 10 i en hage (inte klar)
-        if self.fC == 10:
+                                 self.h / self.s + (self.h / self.s * self.fieldy))  # Random y cord for the cube in the field
+        self.rec = self.mainCanvas.create_rectangle(self.randomx, self.randomy,  self.randomx +40/self.s, self.randomy +40/self.s, # Scales the squares to the amount of fields
+                                         fill=color, outline =color , width=2)  # Draws the square
+        self.fC += 1
+        if self.fC == self.fCMax: 
             self.fC = 0
             self.fieldx += 1
             if self.fieldx > self.s - 1:
@@ -54,8 +61,9 @@ class Application(Frame):
                 self.fieldy += 1
                 if self.fieldy > self.s - 1:
                     return
-        root.after(10, self.generateSquares)  # Hastiheten som nya fyrkanter kommer upp i millisekunder 1/1000s
+        root.after(10, self.generateSquares)  # How fast new squares generates (1000 = 1s)
 root = Tk()
 app = Application(master=root)
 root.title("GA")
 app.mainloop()
+
