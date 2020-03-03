@@ -1,5 +1,13 @@
 import matplotlib.pyplot as plt
 import time
+
+class App():
+    def __init__(self, boars, tigers):
+        self.boars = boars
+        self.tigers = tigers
+
+
+
 class Boar():
     def __init__(self, breedingtimeMod=1, defenceMod=1):
         self.breedingtimeMod = breedingtimeMod
@@ -7,13 +15,24 @@ class Boar():
         self.breedingtime = self.breedingtimeMod * 10
         self.defence = self.defenceMod * 10
 
+class Tiger():
+    def __init__(self, breedingtimeMod=1, attackMod=1, survivalMod=1):
+        self.breedingtimeMod = breedingtimeMod
+        self.attackMod = attackMod
+        self.breedingtime = self.breedingtimeMod * 10
+        self.attack =self.attackMod * 10
+        self.survialMod = survivalMod
+        self.survivalTime = survivalMod * 10
 
-boar1 = Boar()
-boar2= Boar()
-boars = [boar1, boar2]
-plotBoars = []
-plotTime = []
-timer = 1
+
+
+
+
+tiger1 = Tiger()
+tiger2 = Tiger()
+tigers =[tiger1, tiger2]
+
+
 
 def parasig(boars, plotBoars, plotTime, timer):
     if len(boars) >= 2:
@@ -23,10 +42,8 @@ def parasig(boars, plotBoars, plotTime, timer):
             boars.append(i)
     plotBoars.append(len(boars))
     plotTime.append(timer)
+    newArray = [plotTime, plotBoars]
     time.sleep(1)
-    plt.plot(plotTime, plotBoars)
-    plt.show()
-    timer += 1
-    parasig(boars, plotBoars, plotTime, timer)
+    return plotTime, plotBoars
 
-parasig(boars, plotBoars, plotTime, timer)
+def eat(boars, tigers):
