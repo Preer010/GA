@@ -1,0 +1,47 @@
+import matplotlib.pyplot as plt
+import time
+class Boar():
+    def __init__(self, breedingtimeMod=1, defenceMod=1):
+        self.breedingtimeMod = breedingtimeMod
+        self.defenceMod = defenceMod
+        self.breedingtime = self.breedingtimeMod * 10
+        self.defence = self.defenceMod * 10
+
+class Tiger():
+    def __init__(self, breedingtimeMod=1, defenceMod=1):
+        self.breedingtimeMod = breedingtimeMod
+        self.defenceMod = defenceMod
+        self.breedingtime = self.breedingtimeMod * 10
+
+boar1 = Boar()
+boar2= Boar()
+
+boars = [boar1, boar2]
+
+plotBoars = []
+plotTime = []
+timer = 1
+
+
+
+
+
+def parasig(boars, plotBoars, plotTime, timer):
+    if len(boars) >= 2:
+        a = len(boars)//2
+        for i in range(a):
+            i = Boar()
+            boars.append(i)
+
+                
+    plotBoars.append(len(boars))
+    plotTime.append(timer)
+    
+    time.sleep(1)
+    plt.plot(plotTime, plotBoars)
+
+    plt.show()
+    timer += 1
+    parasig(boars, plotBoars, plotTime, timer)
+
+parasig(boars, plotBoars, plotTime, timer)
