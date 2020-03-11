@@ -11,7 +11,7 @@ class App():
 
 
 class Boar():
-    def __init__(self, breedingtimeMod=1, defenceMod=0.5):
+    def __init__(self, breedingtimeMod=1, defenceMod=1):
         self.breedingtimeMod = breedingtimeMod
         self.defenceMod = defenceMod
         self.breedingtime = self.breedingtimeMod * 10
@@ -42,7 +42,7 @@ def parasig(boars, plotBoars, plotTime, timer):
     if len(boars) >= 2:
         for i in range(len(boars)):
             b = random.randint(1, 10)
-            if b >=6:
+            if b >=7:
                 boars.append(Boar())
         #a = len(boars)//2
         #for i in range(a):
@@ -54,10 +54,12 @@ def parasig(boars, plotBoars, plotTime, timer):
 def eat(boars, tigers):
     BreedingTigers = []
     for i in range(len(tigers)):
-        a = random.randint(0, len(boars)-1)
         try:
+            a = random.randint(0, len(boars)-1)
+
             if tigers[i].attack + random.random()*10 >= boars[a].defence + random.random()*10:
                 boars.pop(a)
+                print(len(boars))
                 tigers[i].survivalTime = tigers[i].survivalMod * 10
                 BreedingTigers.append[i]
             else:
@@ -68,7 +70,7 @@ def eat(boars, tigers):
             pass
     for i in range(len(BreedingTigers)):
         b = random.randint(1, 10)
-        if b >=1:
+        if b >=2:
             tigers.append(Tiger())
     return tigers
 
